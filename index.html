@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Самое-самое — магазин</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__row">
+      <div class="brand">
+        <div class="brand__logo">СС</div>
+        <div class="brand__text">
+          <div class="brand__name">Самое-самое</div>
+          <div class="brand__tag">магазин</div>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#catalog">Каталог</a>
+        <a href="#delivery">Доставка</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+
+      <a class="btn" href="#contacts">Заказать</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <h1>Самое-самое — всё нужное, со всего мира!!!</h1>
+          <p class="muted">
+            Мини-сайт витрина: категории, хиты, доставка и контакты. Дальше можно добавить корзину и оплату.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="#catalog">Смотреть каталог</a>
+            <a class="btn btn--ghost" href="#delivery">Условия доставки</a>
+          </div>
+
+          <div class="badges">
+            <div class="badge">Доставка по городу</div>
+            <div class="badge">Оплата: наличные/карта</div>
+            <div class="badge">Гарантия</div>
+          </div>
+        </div>
+
+        <div class="card promo">
+          <div class="promo__title">Акция недели</div>
+          <div class="promo__text">Скидка до 15% на “хиты продаж”</div>
+          <div class="promo__mini muted">Заменим на реальные предложения позже</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catalog" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Каталог</h2>
+          <p class="muted"></p>
+        </div>
+<div class="toolbar">
+  <label class="toolbar__item">
+    Категория
+    <select id="categoryFilter"></select>
+  </label>
+
+  <label class="toolbar__item">
+    Сортировка
+    <select id="sortSelect">
+      <option value="default">По умолчанию</option>
+      <option value="price_asc">Цена: по возрастанию</option>
+      <option value="price_desc">Цена: по убыванию</option>
+      <option value="name_asc">Название: A → Я</option>
+    </select>
+  </label>
+</div>
+
+        <div class="grid" id="productsGrid"></div>
+
+
+    <section id="delivery" class="section section--alt">
+      <div class="container">
+        <div class="section__head">
+          <h2>Доставка и оплата</h2>
+          <p class="muted"></p>
+        </div>
+
+        <div class="cols">
+          <div class="card">
+            <h3>Доставка</h3>
+            <ul>
+              <li>По городу: в течении дня</li>
+              <li>Самовывоз: бесплатно</li>
+              <li>Время: 10:00–20:00</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Оплата</h3>
+            <ul>
+              <li>Карта / Kaspi / наличные</li>
+              <li>Чек и гарантия</li>
+              <li>Возврат по правилам магазина</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contacts" class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2>Контакты</h2>
+          <p class="muted"></p>
+        </div>
+
+        <div class="cols">
+          <div class="card">
+            <h3>Связь</h3>
+            <p><strong>Тел:</strong> +7 (701) 761-67-60</p>
+            <p><strong>WhatsApp:</strong> +7 (701) 761-67-60</p>
+            <p><strong>Адрес:</strong> Алматы, Гагарина, 124</p>
+          </div>
+
+          <form class="card form" onsubmit="return false;">
+            <h3>Заявка</h3>
+            <label>Имя
+              <input type="text" placeholder="Как к вам обращаться" />
+            </label>
+            <label>Телефон
+              <input type="tel" placeholder="+7..." />
+            </label>
+            <label>Что нужно
+              <textarea placeholder="Например: Товар №2, 1 шт, доставка сегодня"></textarea>
+            </label>
+            <button class="btn" type="submit">Отправить (пока без обработки)</button>
+            <div class="muted small">Следующий шаг — отправка в Telegram/почту.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <div class="muted">© <span id="y"></span> Самое-самое</div>
+      <div class="muted small">Сайт-витрина v0.1</div>
+    </div>
+  </footer>
+
+  <script src="catalog.js"></script>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
