@@ -5,9 +5,10 @@
   --muted:#6f7c73;
   --line:#e3eadf;
 
-  --accent:#2e7d32;   /* eco green */
-  --accent2:#8bc34a;  /* lime */
-  --accent3:#ffb74d;  /* warm appetite */
+  --accent:#2e7d32;
+  --accent2:#8bc34a;
+  --accent3:#ffb74d;
+
   --shadow: 0 10px 26px rgba(34, 60, 80, 0.12);
   --radius: 18px;
 }
@@ -29,7 +30,6 @@ body{
 .muted{color:var(--muted)}
 .small{font-size:12px}
 
-/* Header */
 .header{
   position:sticky;
   top:0;
@@ -57,7 +57,6 @@ body{
 .nav a{color:var(--muted); text-decoration:none}
 .nav a:hover{color:var(--text)}
 
-/* Buttons */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -91,7 +90,6 @@ body{
   box-shadow:none;
 }
 
-/* Hero */
 .hero{padding:48px 0 28px}
 .hero__grid{display:grid; grid-template-columns: 1.3fr .7fr; gap:18px}
 .hero h1{font-size:38px; margin:0 0 10px; line-height:1.08}
@@ -107,7 +105,6 @@ body{
   color: var(--muted);
 }
 
-/* Sections */
 .section{padding:34px 0}
 .section--alt{
   background: rgba(255,255,255,.55);
@@ -123,7 +120,6 @@ body{
 }
 .section__head h2{margin:0}
 
-/* Cards */
 .card{
   border:1px solid var(--line);
   background: var(--card);
@@ -147,7 +143,6 @@ body{
 .promo__text{font-size:22px; font-weight:800}
 .promo__mini{margin-top:auto}
 
-/* Catalog controls */
 .toolbar{
   display:flex;
   gap:12px;
@@ -175,10 +170,8 @@ body{
   box-shadow: 0 0 0 4px rgba(139,195,74,.18);
 }
 
-/* Grid */
 .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
 
-/* Product cards */
 .product{
   border:1px solid var(--line);
   background: var(--card);
@@ -210,7 +203,12 @@ body{
   display:block;
   border-radius:12px;
   transform: scale(1.08);
+  transition: transform .25s ease;
 }
+.product:hover .product__photo{
+  transform: scale(1.14);
+}
+
 .product__body{padding:12px}
 .product__name{font-weight:800; margin-bottom:4px}
 .product__price{
@@ -220,7 +218,7 @@ body{
   color: var(--accent);
 }
 
-/* Product badges (CLEAN / ECO) */
+/* badges */
 .badges-on-card{
   position:absolute;
   top:10px;
@@ -243,38 +241,12 @@ body{
   border:1px solid rgba(0,0,0,.08);
   user-select:none;
 }
-.pbadge.b--eco{
-  background:#e8f5e9;
-  color:#2e7d32;
-  border-color:#c8e6c9;
-}
-.pbadge.b--bio{
-  background:#f1f8e9;
-  color:#558b2f;
-  border-color:#dcedc8;
-}
-.pbadge.b--new{
-  background:#fff8e1;
-  color:#ef6c00;
-  border-color:#ffecb3;
-}
-.pbadge.b--hit{
-  background:#ffebee;
-  color:#c62828;
-  border-color:#ffcdd2;
-}
+.pbadge.b--eco{ background:#e8f5e9; color:#2e7d32; border-color:#c8e6c9; }
+.pbadge.b--bio{ background:#f1f8e9; color:#558b2f; border-color:#dcedc8; }
+.pbadge.b--new{ background:#fff8e1; color:#ef6c00; border-color:#ffecb3; }
+.pbadge.b--hit{ background:#ffebee; color:#c62828; border-color:#ffcdd2; }
 
-/* Fallback text for broken images */
-.product__img .noimg__text{
-  display:none;
-  font-weight:800;
-  color: var(--muted);
-}
-.product__img.noimg .noimg__text{
-  display:block;
-}
-
-/* Forms */
+/* forms */
 .cols{display:grid; grid-template-columns: 1fr 1fr; gap:14px}
 .form label{
   display:block;
@@ -298,13 +270,145 @@ input:focus, textarea:focus{
 }
 textarea{min-height:88px; resize:vertical}
 
-/* Footer */
 .footer{
   padding:18px 0;
   border-top:1px solid var(--line);
   background: rgba(255,255,255,.65);
 }
 .footer__row{display:flex; justify-content:space-between; gap:12px}
+
+/* ===== CART BUTTON ===== */
+.cart-btn{ position:relative; }
+.cart-badge{
+  margin-left:8px;
+  min-width:22px;
+  height:22px;
+  padding:0 6px;
+  border-radius:999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:800;
+  background: rgba(139,195,74,.22);
+  border:1px solid rgba(139,195,74,.30);
+  color: var(--accent);
+}
+
+/* ===== DRAWER ===== */
+.drawer-overlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,.22);
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .2s ease;
+  z-index:50;
+}
+.drawer-overlay.is-open{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.drawer{
+  position:fixed;
+  top:0;
+  right:0;
+  height:100%;
+  width:min(420px, 92vw);
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(10px);
+  border-left:1px solid var(--line);
+  box-shadow: -12px 0 28px rgba(34,60,80,.18);
+  transform: translateX(110%);
+  transition: transform .22s ease;
+  z-index:60;
+  display:flex;
+  flex-direction:column;
+}
+.drawer.is-open{ transform: translateX(0); }
+
+.drawer__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 14px;
+  border-bottom:1px solid var(--line);
+}
+.drawer__title{ font-size:18px; font-weight:900; }
+
+.icon-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:12px;
+  padding:8px 10px;
+  cursor:pointer;
+}
+
+.drawer__body{
+  padding:12px 14px 14px;
+  overflow:auto;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.cart-items{ display:flex; flex-direction:column; gap:10px; }
+
+.cart-item{
+  display:grid;
+  grid-template-columns: 1fr auto;
+  gap:10px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:10px;
+  background:#fff;
+}
+.cart-item__name{ font-weight:800; }
+.cart-item__meta{ margin-top:2px; font-size:12px; color:var(--muted); }
+
+.qty{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.qty button{
+  width:30px;
+  height:30px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+  font-weight:900;
+}
+.qty span{
+  min-width:24px;
+  text-align:center;
+  font-weight:900;
+}
+
+.cart-summary{
+  margin-top:auto;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:12px;
+  background:#fff;
+}
+.cart-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+.cart-actions{
+  display:flex;
+  gap:10px;
+  margin-top:10px;
+}
+.cart-actions .btn{ flex:1; }
+
+.cart-note{ margin-top:6px; }
 
 /* Responsive */
 @media (max-width: 860px){
@@ -316,7 +420,4 @@ textarea{min-height:88px; resize:vertical}
 @media (max-width: 520px){
   .grid{grid-template-columns: 1fr}
   .hero h1{font-size:30px}
-}
-.product:hover .product__photo{
-  transform: scale(1.14);
 }
